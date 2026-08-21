@@ -92,6 +92,28 @@
             color: var(--brand-purple);
             font-weight: 700;
         }
+
+        /* Responsive layout enhancements */
+        html { overflow-x: hidden; }
+        body { min-width: 320px; }
+        img, svg, video { max-width: 100%; }
+        button, a, input, textarea, select { touch-action: manipulation; }
+        @media (max-width: 767px) {
+            .container { width: 100%; }
+            header .container { padding-left: 0.75rem; padding-right: 0.75rem; }
+            #notice-banner .container { padding-left: 0.5rem; padding-right: 0.5rem; gap: .25rem; }
+            #notice-text { line-height: 1.35; }
+            /* Prevent wide content from forcing horizontal scrolling */
+            table { min-width: 640px; }
+            .overflow-auto { -webkit-overflow-scrolling: touch; }
+            input, textarea, select { max-width: 100%; }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container { max-width: 96%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-purple-900 selection:text-amber-100">
