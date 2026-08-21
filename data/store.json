@@ -1,0 +1,103 @@
+{
+  "site": {
+    "name": "MRITTIKA",
+    "tagline": "The Traditional Craft",
+    "notice": "🌿 Welcome to Mrittika - Handcrafted Traditional Elegance. Free Shipping on Orders Over 3000 BDT!",
+    "phone": "01339680482",
+    "aboutFooter": "Celebrating traditional Bangladeshi heritage through exquisite sarees, handcrafted terracotta, authentic jewelry, and artisanal crafts.",
+    "logoUrl": "",
+    "faviconUrl": "https://api.iconify.design/lucide:gem.svg?color=%234B006E"
+  },
+  "categories": [
+    "All Crafts",
+    "Jamdani & Shari",
+    "Three Piece",
+    "Jewelry",
+    "Home Decor",
+    "Cosmetics"
+  ],
+  "heroSlides": [
+    {
+      "tag": "Heritage Craft",
+      "title": "Handcrafted Royalty Born From Nature",
+      "desc": "Explore pure Jamdani Sarees, traditional brass ornaments, organic cosmetics, and handcrafted clay decor created by Bangladeshi artisans.",
+      "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=80"
+    },
+    {
+      "tag": "New Arrival",
+      "title": "Authentic Dhakai Jamdani & Terracotta",
+      "desc": "Centuries of weaving mastery woven into breathable cotton & silk threads with real gold wire work.",
+      "image": "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=80"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "code": "MRT-101",
+      "title": "Royal Crimson Dhakai Jamdani Shari",
+      "category": "Jamdani & Shari",
+      "price": 8500,
+      "variants": "Crimson & Gold, Royal Red, Maroon Silk",
+      "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+      "desc": "Hand-woven pure cotton Dhakai Jamdani featuring traditional floral motif weaving by master craft artisans of Narayanganj."
+    },
+    {
+      "id": 2,
+      "code": "MRT-102",
+      "title": "Hand-painted Terracotta Clay Vase",
+      "category": "Home Decor",
+      "price": 1850,
+      "variants": "Terracotta Brown, Herbal Purple Glaze, Natural Clay",
+      "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80",
+      "desc": "Eco-friendly clay vase with natural herbal purple glaze and traditional Bengali alpana motifs."
+    },
+    {
+      "id": 3,
+      "code": "MRT-103",
+      "title": "Brass Floral Choker & Earrings Set",
+      "category": "Jewelry",
+      "price": 2400,
+      "variants": "Antique Gold, Burnished Copper",
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "desc": "Antique gold plated handcrafted brass jewelry set designed with intricate lotus patterns."
+    },
+    {
+      "id": 4,
+      "code": "MRT-104",
+      "title": "Organic Multani Mitti & Rose Beauty Pack",
+      "category": "Cosmetics",
+      "price": 750,
+      "variants": "Single Pack (200g), Duo Gift Pack (400g)",
+      "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+      "desc": "100% natural clay face mask infused with cold-pressed rose water for glowing skin."
+    },
+    {
+      "id": 5,
+      "code": "MRT-105",
+      "title": "Hand-embroidered Silk Three Piece Set",
+      "category": "Three Piece",
+      "price": 5200,
+      "variants": "Standard Size, Unstitched Fabric, Tailored Size",
+      "image": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+      "desc": "Pure raw silk kameez with extensive Nakshi Kantha hand-stitching and organza dupatta."
+    }
+  ],
+  "blog": [
+    {
+      "id": 1,
+      "title": "The Legacy of Dhakai Jamdani: UNESCO Intangible Cultural Heritage",
+      "author": "Mrittika Curator",
+      "date": "August 15, 2026",
+      "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80",
+      "content": "<p>Dhakai Jamdani is not merely a piece of cloth; it is a piece of living history woven on handlooms without any mechanical assistance...</p><p>Originating during the Mughal era in Bengal, the sheer cotton muslin Jamdani patterns are drawn directly onto the loom from memory.</p>"
+    },
+    {
+      "id": 2,
+      "title": "How to Style Traditional Brass Jewelry with Modern Wear",
+      "author": "Style Desk",
+      "date": "August 10, 2026",
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80",
+      "content": "<p>Brass jewelry holds a rustic charm that instantly elevates both traditional sarees and contemporary fusion tops...</p>"
+    }
+  ]
+}

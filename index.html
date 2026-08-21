@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">Mrittika - The Traditional Craft | Shari, Jewelry & Home Decor</title>
+    <!-- Dynamic Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="https://api.iconify.design/lucide:gem.svg?color=%234B006E">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Coldiac / Cormorant Garamond & Lora fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-purple: #4B006E;
+            --brand-purple-dark: #360050;
+            --brand-gold: #C2A060;
+            --brand-gold-light: #E5C88B;
+            --brand-cream: #F3EEE7;
+            --brand-cream-light: #FAF7F2;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--brand-cream-light);
+            color: #2D2731;
+        }
+
+        .font-coldiac, .font-heading {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+        }
+
+        .bg-brand-purple { background-color: var(--brand-purple); }
+        .bg-brand-purple-dark { background-color: var(--brand-purple-dark); }
+        .bg-brand-cream { background-color: var(--brand-cream); }
+        .bg-brand-gold { background-color: var(--brand-gold); }
+        
+        .text-brand-purple { color: var(--brand-purple); }
+        .text-brand-gold { color: var(--brand-gold); }
+        .text-brand-cream { color: var(--brand-cream); }
+        
+        .border-brand-purple { border-color: var(--brand-purple); }
+        .border-brand-gold { border-color: var(--brand-gold); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #C2A060 0%, #D4B67B 50%, #B08E4F 100%);
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            box-shadow: 0 4px 15px rgba(194, 160, 96, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--brand-cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B8A8C0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-purple);
+        }
+
+        .gold-border-decor {
+            position: relative;
+        }
+        .gold-border-decor::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--brand-gold);
+        }
+
+        /* Tab styling in admin */
+        .admin-tab.active {
+            border-bottom: 3px solid var(--brand-purple);
+            color: var(--brand-purple);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-purple-900 selection:text-amber-100">
+
+    <!-- TOP NOTICE BANNER -->
+    <div id="notice-banner" class="bg-brand-purple text-amber-100 text-xs md:text-sm py-2 px-4 text-center font-medium tracking-wide flex justify-between items-center transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <span class="w-full text-center" id="notice-text">🌿 Welcome to Mrittika - Handcrafted Traditional Elegance. Free Shipping on Orders Over 3000 BDT!</span>
+            <button onclick="dismissNotice()" class="text-amber-200 hover:text-white ml-2"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-amber-200/60 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo (Secret 5-click trigger to unlock Admin Panel) -->
+            <a href="#" onclick="switchView('shop');" class="flex items-center gap-3 group select-none">
+                <div id="logo-container" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-amber-600/40 p-0.5 flex items-center justify-center bg-white shadow-inner">
+                    <!-- Brand Crest Emblem -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-[#4B006E] fill-current">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#C2A060" stroke-width="3"/>
+                        <path d="M 30,70 L 30,30 L 45,55 L 50,45 L 55,55 L 70,30 L 70,70 L 62,70 L 62,45 L 52,62 L 48,62 L 38,45 L 38,70 Z" fill="#4B006E"/>
+                        <circle cx="50" cy="22" r="4" fill="#C2A060"/>
+                    </svg>
+                </div>
+                <div>
+                    <span id="brand-name-display" class="font-heading text-2xl md:text-3xl font-bold tracking-wider text-[#4B006E] block leading-none">MRITTIKA</span>
+                    <span id="brand-tagline-display" class="text-[10px] uppercase tracking-[0.25em] text-[#C2A060] font-semibold block mt-1">The Traditional Craft</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#" onclick="switchView('shop')" class="hover:text-[#4B006E] transition-colors py-1">Home & Shop</a>
+                <a href="#" onclick="filterByCategory('Jamdani & Shari')" class="hover:text-[#4B006E] transition-colors py-1">Shari</a>
+                <a href="#" onclick="filterByCategory('Three Piece')" class="hover:text-[#4B006E] transition-colors py-1">Three Piece</a>
+                <a href="#" onclick="filterByCategory('Jewelry')" class="hover:text-[#4B006E] transition-colors py-1">Jewelry</a>
+                <a href="#" onclick="filterByCategory('Home Decor')" class="hover:text-[#4B006E] transition-colors py-1">Home Decor</a>
+                <a href="#" onclick="switchView('blog')" class="hover:text-[#4B006E] transition-colors py-1 flex items-center gap-1"><i data-lucide="book-open" class="w-4 h-4 text-amber-600"></i> Journal / Blog</a>
+            </nav>
+
+            <!-- Actions (Cart, Mobile Toggle) -->
+            <div class="flex items-center space-x-4">
+                <!-- Cart Button -->
+                <button onclick="toggleCartModal()" class="relative p-2.5 rounded-full bg-[#4B006E] text-white hover:bg-[#360050] transition-all shadow-md">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-[#C2A060] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-800 hover:bg-slate-200">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-amber-100 px-6 py-4 space-y-3">
+            <a href="#" onclick="switchView('shop'); toggleMobileMenu();" class="block py-2 text-base font-semibold text-slate-800 border-b border-slate-100">Shop Catalog</a>
+            <a href="#" onclick="filterByCategory('Jamdani & Shari'); toggleMobileMenu();" class="block py-2 text-slate-600">Saree Collection</a>
+            <a href="#" onclick="filterByCategory('Three Piece'); toggleMobileMenu();" class="block py-2 text-slate-600">Three Piece</a>
+            <a href="#" onclick="filterByCategory('Jewelry'); toggleMobileMenu();" class="block py-2 text-slate-600">Jewelry & Accessories</a>
+            <a href="#" onclick="filterByCategory('Home Decor'); toggleMobileMenu();" class="block py-2 text-slate-600">Home Decor & Crafts</a>
+            <a href="#" onclick="switchView('blog'); toggleMobileMenu();" class="block py-2 text-slate-600 text-amber-800 font-medium">Craft Journal / Blog</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow">
+        
+        <!-- ================= VIEW: SHOP & HOME ================= -->
+        <section id="view-shop" class="space-y-12">
+            
+            <!-- HERO SLIDER SECTION -->
+            <div class="relative w-full overflow-hidden bg-slate-900 text-white min-h-[380px] md:min-h-[500px] flex items-center">
+                <div id="hero-slider-container" class="w-full h-full absolute inset-0 transition-all duration-700">
+                    <!-- Slides loaded via JS -->
+                </div>
+                
+                <!-- Overlay gradient -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1a0026]/90 via-[#4B006E]/60 to-transparent z-10 pointer-events-none"></div>
+
+                <!-- Slider Content overlay -->
+                <div class="container mx-auto px-6 md:px-12 relative z-20 max-w-4xl py-12">
+                    <span id="hero-tag" class="inline-block px-3 py-1 bg-[#C2A060] text-white text-xs uppercase tracking-widest rounded-sm font-semibold mb-3 shadow">Heritage Collection</span>
+                    <h1 id="hero-title" class="font-heading text-3xl md:text-6xl font-bold leading-tight mb-4 text-amber-50">Handcrafted Royalty Born From Nature</h1>
+                    <p id="hero-desc" class="text-slate-200 text-sm md:text-lg mb-8 max-w-xl font-light">Explore pure Jamdani Sarees, traditional brass ornaments, organic cosmetics, and handcrafted clay decor created by Bangladeshi artisans.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button id="hero-cta" onclick="scrollToProducts()" class="btn-gold px-8 py-3.5 rounded-none font-medium tracking-wider text-sm flex items-center gap-2 shadow-lg">
+                            <span>EXPLORE COLLECTION</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slider Controls -->
+                <div class="absolute bottom-6 right-6 z-30 flex items-center gap-2">
+                    <button onclick="prevSlide()" class="p-2.5 rounded-full bg-black/40 hover:bg-[#4B006E] text-white border border-white/20 backdrop-blur transition"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                    <span id="slide-indicator" class="text-xs text-white/80 font-mono px-2">1 / 3</span>
+                    <button onclick="nextSlide()" class="p-2.5 rounded-full bg-black/40 hover:bg-[#4B006E] text-white border border-white/20 backdrop-blur transition"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+
+            <!-- CATEGORY NAV PILLS -->
+            <div class="container mx-auto px-4 pt-4">
+                <div class="text-center mb-6">
+                    <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#4B006E]">Browse By Craft</h2>
+                    <div class="w-12 h-0.5 bg-[#C2A060] mx-auto mt-2"></div>
+                </div>
+                <div id="category-pills" class="flex flex-wrap justify-center gap-2 md:gap-4">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <!-- PRODUCT CATALOG GRID -->
+            <div id="products-section" class="container mx-auto px-4 pb-16">
+                <!-- Search & Filter Bar -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-4 border-b border-amber-200/60 gap-4">
+                    <p class="text-sm text-slate-600 font-medium">Showing <span id="product-count" class="text-[#4B006E] font-bold">0</span> artisan items</p>
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <div class="relative flex-grow md:w-64">
+                            <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Search shari, jewelry, clay..." class="w-full pl-9 pr-4 py-2 text-sm bg-white border border-amber-200 rounded-md focus:outline-none focus:border-[#4B006E]">
+                            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                    <!-- Product Cards injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW: WORDPRESS BLOG ================= -->
+        <section id="view-blog" class="hidden container mx-auto px-4 py-10 max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-[0.3em] text-[#C2A060]">Stories & Heritage</span>
+                <h1 class="font-heading text-4xl md:text-5xl font-bold text-[#4B006E] mt-1">Mrittika Craft Journal</h1>
+                <p class="text-slate-600 mt-2 italic font-serif">Articles on traditional Bangladeshi weaving, skincare secrets, and pottery history for SEO & culture.</p>
+                <div class="w-16 h-0.5 bg-[#C2A060] mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Blog List -->
+                <div class="md:col-span-2 space-y-8" id="blog-posts-list">
+                    <!-- Post cards injected here -->
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg border border-amber-200/80 shadow-sm">
+                        <h3 class="font-heading text-xl font-bold text-[#4B006E] mb-3">About Mrittika</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mrittika is dedicated to elevating indigenous artisans. Each product is meticulously handcrafted preserving century-old techniques.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg border border-amber-200/80 shadow-sm">
+                        <h3 class="font-heading text-xl font-bold text-[#4B006E] mb-3">Categories</h3>
+                        <div id="blog-categories-list" class="space-y-2 text-sm text-slate-700">
+                            <!-- Injected -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW: SINGLE POST VIEW ================= -->
+        <section id="view-single-post" class="hidden container mx-auto px-4 py-10 max-w-3xl">
+            <button onclick="switchView('blog')" class="inline-flex items-center gap-2 text-xs font-bold text-[#4B006E] uppercase tracking-wider mb-6 hover:underline">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Journal
+            </button>
+            <article id="post-content-container" class="bg-white p-6 md:p-10 rounded-xl border border-amber-200/80 shadow-sm">
+                <!-- Post full content injected here -->
+            </article>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#2a003e] text-amber-50 border-t-4 border-[#C2A060] mt-16">
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-heading text-2xl font-bold text-amber-200 tracking-wider">MRITTIKA</span>
+                </div>
+                <p id="footer-about" class="text-xs text-amber-100/70 leading-relaxed">
+                    Celebrating traditional Bangladeshi heritage through exquisite sarees, handcrafted terracotta, authentic jewelry, and artisanal crafts.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-heading text-lg font-semibold text-amber-200 mb-4 border-b border-amber-900 pb-2">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-amber-100/80">
+                    <li><a href="#" onclick="switchView('shop')" class="hover:text-amber-300">New Arrivals</a></li>
+                    <li><a href="#" onclick="filterByCategory('Jamdani & Shari')" class="hover:text-amber-300">Jamdani Shari</a></li>
+                    <li><a href="#" onclick="switchView('blog')" class="hover:text-amber-300">Craft Blog</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-heading text-lg font-semibold text-amber-200 mb-4 border-b border-amber-900 pb-2">Craft Guarantee</h4>
+                <p class="text-xs text-amber-100/70 leading-relaxed mb-3">
+                    Every order triggers customized mastercraft preparation. Once finalized, confirm via WhatsApp to complete your order.
+                </p>
+                <div class="flex items-center gap-2 text-xs text-emerald-400 font-medium">
+                    <i data-lucide="phone-call" class="w-4 h-4"></i>
+                    <span>Order Hotline: <span id="footer-phone" class="text-white font-bold">01339680482</span></span>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-heading text-lg font-semibold text-amber-200 mb-4 border-b border-amber-900 pb-2">Connect With Us</h4>
+                <div class="flex space-y-2 flex-col text-xs text-amber-100/80" id="social-links-footer">
+                    <!-- Injected -->
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-purple-900/60 py-4 text-center text-[11px] text-amber-200/50">
+            <p>&copy; <span id="year">2026</span> Mrittika - The Traditional Craft. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART & CHECKOUT MODAL -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-end transition-opacity">
+        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl overflow-hidden">
+            <!-- Cart Header -->
+            <div class="bg-[#4B006E] text-white p-4 flex justify-between items-center border-b border-amber-500/40">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-300"></i>
+                    <h3 class="font-heading text-xl font-bold text-amber-100">Your Craft Bag</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="text-amber-200 hover:text-white p-1"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <!-- Cart Items -->
+            <div id="cart-items-list" class="flex-grow overflow-y-auto p-4 space-y-4 divide-y divide-slate-100">
+                <!-- Cart item template injected here -->
+            </div>
+
+            <!-- Cart Summary & WhatsApp Checkout -->
+            <div class="p-5 bg-amber-50/50 border-t border-amber-200/80 space-y-4">
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex justify-between text-slate-600">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal" class="font-semibold text-slate-900">0 BDT</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>Crafting & Packing:</span>
+                        <span class="text-emerald-700 font-medium">Free</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-[#4B006E] pt-2 border-t border-amber-200">
+                        <span>Estimated Total:</span>
+                        <span id="cart-total">0 BDT</span>
+                    </div>
+                </div>
+
+                <!-- Custom Note input for Crafting -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Customization / Delivery Note:</label>
+                    <textarea id="checkout-note" rows="2" placeholder="e.g. Saree blouse size customization, specific delivery date..." class="w-full text-xs p-2 border border-amber-300 rounded focus:outline-none focus:ring-1 focus:ring-[#4B006E]"></textarea>
+                </div>
+
+                <!-- Customer Info -->
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <input type="text" id="cust-name" placeholder="Your Name *" class="p-2 border border-slate-300 rounded">
+                    <input type="text" id="cust-address" placeholder="Delivery Address *" class="p-2 border border-slate-300 rounded">
+                </div>
+
+                <!-- Direct WhatsApp Order Button -->
+                <button onclick="submitOrderToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded shadow flex items-center justify-center gap-2 text-sm tracking-wide transition">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                    <span>SEND ORDER TO WHATSAPP</span>
+                </button>
+                <p class="text-[10px] text-center text-slate-500 italic">Clicking opens WhatsApp directed to <span id="cart-phone-display">01339680482</span> to confirm items.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative p-6 border-2 border-amber-200">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 p-1 bg-slate-100 rounded-full"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div id="product-modal-body">
+                <!-- Modal details injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC (JAVASCRIPT) -->
+    <script>
+        // ================= INITIAL DATA & STORE STATE ================= //
+        const DEFAULT_DATA = {
+            site: {
+                name: "MRITTIKA",
+                tagline: "The Traditional Craft",
+                notice: "🌿 Welcome to Mrittika - Handcrafted Traditional Elegance. Free Shipping on Orders Over 3000 BDT!",
+                phone: "01339680482",
+                aboutFooter: "Celebrating traditional Bangladeshi heritage through exquisite sarees, handcrafted terracotta, authentic jewelry, and artisanal crafts.",
+                logoUrl: "",
+                faviconUrl: "https://api.iconify.design/lucide:gem.svg?color=%234B006E",
+            },
+            categories: ["All Crafts", "Jamdani & Shari", "Three Piece", "Jewelry", "Home Decor", "Cosmetics"],
+            heroSlides: [
+                {
+                    tag: "Heritage Craft",
+                    title: "Handcrafted Royalty Born From Nature",
+                    desc: "Explore pure Jamdani Sarees, traditional brass ornaments, organic cosmetics, and handcrafted clay decor created by Bangladeshi artisans.",
+                    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=80"
+                },
+                {
+                    tag: "New Arrival",
+                    title: "Authentic Dhakai Jamdani & Terracotta",
+                    desc: "Centuries of weaving mastery woven into breathable cotton & silk threads with real gold wire work.",
+                    image: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=80"
+                }
+            ],
+            products: [
+                {
+                    id: 1,
+                    code: "MRT-101",
+                    title: "Royal Crimson Dhakai Jamdani Shari",
+                    category: "Jamdani & Shari",
+                    price: 8500,
+                    variants: "Crimson & Gold, Royal Red, Maroon Silk",
+                    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+                    desc: "Hand-woven pure cotton Dhakai Jamdani featuring traditional floral motif weaving by master craft artisans of Narayanganj."
+                },
+                {
+                    id: 2,
+                    code: "MRT-102",
+                    title: "Hand-painted Terracotta Clay Vase",
+                    category: "Home Decor",
+                    price: 1850,
+                    variants: "Terracotta Brown, Herbal Purple Glaze, Natural Clay",
+                    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80",
+                    desc: "Eco-friendly clay vase with natural herbal purple glaze and traditional Bengali alpana motifs."
+                },
+                {
+                    id: 3,
+                    code: "MRT-103",
+                    title: "Brass Floral Choker & Earrings Set",
+                    category: "Jewelry",
+                    price: 2400,
+                    variants: "Antique Gold, Burnished Copper",
+                    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+                    desc: "Antique gold plated handcrafted brass jewelry set designed with intricate lotus patterns."
+                },
+                {
+                    id: 4,
+                    code: "MRT-104",
+                    title: "Organic Multani Mitti & Rose Beauty Pack",
+                    category: "Cosmetics",
+                    price: 750,
+                    variants: "Single Pack (200g), Duo Gift Pack (400g)",
+                    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
+                    desc: "100% natural clay face mask infused with cold-pressed rose water for glowing skin."
+                },
+                {
+                    id: 5,
+                    code: "MRT-105",
+                    title: "Hand-embroidered Silk Three Piece Set",
+                    category: "Three Piece",
+                    price: 5200,
+                    variants: "Standard Size, Unstitched Fabric, Tailored Size",
+                    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80",
+                    desc: "Pure raw silk kameez with extensive Nakshi Kantha hand-stitching and organza dupatta."
+                }
+            ],
+            blog: [
+                {
+                    id: 1,
+                    title: "The Legacy of Dhakai Jamdani: UNESCO Intangible Cultural Heritage",
+                    author: "Mrittika Curator",
+                    date: "August 15, 2026",
+                    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80",
+                    content: "<p>Dhakai Jamdani is not merely a piece of cloth; it is a piece of living history woven on handlooms without any mechanical assistance...</p><p>Originating during the Mughal era in Bengal, the sheer cotton muslin Jamdani patterns are drawn directly onto the loom from memory.</p>"
+                },
+                {
+                    id: 2,
+                    title: "How to Style Traditional Brass Jewelry with Modern Wear",
+                    author: "Style Desk",
+                    date: "August 10, 2026",
+                    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80",
+                    content: "<p>Brass jewelry holds a rustic charm that instantly elevates both traditional sarees and contemporary fusion tops...</p>"
+                }
+            ]
+        };
+
+        // App State
+        const PUBLIC_STORE_URL = './data/store.json';
+        let store = JSON.parse(localStorage.getItem('mrittika_store')) || DEFAULT_DATA;
+        let cart = JSON.parse(localStorage.getItem('mrittika_cart')) || [];
+        let currentCategory = "All Crafts";
+        let currentSlideIdx = 0;
+
+        // Public site stores only a local cache; publishing is handled by admin.html.
+        function sanitizePublicStore(data) {
+            const clean = JSON.parse(JSON.stringify(data));
+            if (clean.site) {
+                delete clean.site.adminPin;
+                delete clean.site.github;
+            }
+            return clean;
+        }
+
+        function saveStore() {
+            store = sanitizePublicStore(store);
+            localStorage.setItem('mrittika_store', JSON.stringify(store));
+            renderAll();
+        }
+
+        async function loadPublicStore() {
+            try {
+                const response = await fetch(`${PUBLIC_STORE_URL}?v=${Date.now()}`, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const remote = await response.json();
+                store = sanitizePublicStore(remote);
+                localStorage.setItem('mrittika_store', JSON.stringify(store));
+            } catch (error) {
+                console.warn('Could not load remote store.json; using local/default data.', error);
+                store = sanitizePublicStore(store || DEFAULT_DATA);
+            }
+            renderAll();
+        }
+
+        function saveCart() {
+            localStorage.setItem('mrittika_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        // Initialize Application
+        window.onload = async function() {
+            await loadPublicStore();
+            startHeroAutoplay();
+            lucide.createIcons();
+        };
+
+        function renderAll() {
+            // Render Site Info
+            document.getElementById('brand-name-display').innerText = store.site.name;
+            document.getElementById('brand-tagline-display').innerText = store.site.tagline;
+            document.getElementById('notice-text').innerText = store.site.notice;
+            document.getElementById('footer-phone').innerText = store.site.phone;
+            document.getElementById('cart-phone-display').innerText = store.site.phone;
+            document.getElementById('footer-about').innerText = store.site.aboutFooter;
+
+            // Render Logo & Favicon
+            const logoContainer = document.getElementById('logo-container');
+            if (store.site.logoUrl && store.site.logoUrl.trim() !== '') {
+                logoContainer.innerHTML = `<img src="${store.site.logoUrl}" alt="Logo" class="w-full h-full object-contain rounded-full" onerror="this.onerror=null; this.outerHTML='<svg viewBox=\\'0 0 100 100\\' class=\\'w-full h-full text-[#4B006E] fill-current\\'><circle cx=\\'50\\' cy=\\'50\\' r=\\'45\\' fill=\\'none\\' stroke=\\'#C2A060\\' stroke-width=\\'3\\'/><path d=\\'M 30,70 L 30,30 L 45,55 L 50,45 L 55,55 L 70,30 L 70,70 L 62,70 L 62,45 L 52,62 L 48,62 L 38,45 L 38,70 Z\\' fill=\\'#4B006E\\'/><circle cx=\\'50\\' cy=\\'22\\' r=\\'4\\' fill=\\'#C2A060\\'/></svg>';">`;
+            } else {
+                logoContainer.innerHTML = `
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-[#4B006E] fill-current">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#C2A060" stroke-width="3"/>
+                        <path d="M 30,70 L 30,30 L 45,55 L 50,45 L 55,55 L 70,30 L 70,70 L 62,70 L 62,45 L 52,62 L 48,62 L 38,45 L 38,70 Z" fill="#4B006E"/>
+                        <circle cx="50" cy="22" r="4" fill="#C2A060"/>
+                    </svg>
+                `;
+            }
+
+            const faviconElem = document.getElementById('dynamic-favicon');
+            if (faviconElem && store.site.faviconUrl) {
+                faviconElem.href = store.site.faviconUrl;
+            }
+
+            renderHero();
+            renderCategoryPills();
+            renderProducts();
+            renderBlog();
+            updateCartUI();
+            
+            // Re-initialize icons
+            setTimeout(() => lucide.createIcons(), 50);
+        }
+
+        // ================= HERO SLIDER ================= //
+        function renderHero() {
+            const container = document.getElementById('hero-slider-container');
+            const slide = store.heroSlides[currentSlideIdx] || store.heroSlides[0];
+
+            if(!slide) return;
+
+            container.style.backgroundImage = `url('${slide.image}')`;
+            container.style.backgroundSize = 'cover';
+            container.style.backgroundPosition = 'center';
+
+            document.getElementById('hero-tag').innerText = slide.tag;
+            document.getElementById('hero-title').innerText = slide.title;
+            document.getElementById('hero-desc').innerText = slide.desc;
+            document.getElementById('slide-indicator').innerText = `${currentSlideIdx + 1} / ${store.heroSlides.length}`;
+        }
+
+        function nextSlide() {
+            currentSlideIdx = (currentSlideIdx + 1) % store.heroSlides.length;
+            renderHero();
+        }
+
+        function prevSlide() {
+            currentSlideIdx = (currentSlideIdx - 1 + store.heroSlides.length) % store.heroSlides.length;
+            renderHero();
+        }
+
+        function startHeroAutoplay() {
+            setInterval(() => {
+                if(store.heroSlides.length > 1) nextSlide();
+            }, 6000);
+        }
+
+        // ================= PRODUCTS & CATEGORIES ================= //
+        function renderCategoryPills() {
+            const container = document.getElementById('category-pills');
+            container.innerHTML = store.categories.map(cat => `
+                <button onclick="filterByCategory('${cat}')" 
+                    class="px-4 py-2 text-xs md:text-sm font-semibold rounded-full border transition ${currentCategory === cat ? 'bg-[#4B006E] text-white border-[#4B006E] shadow-md' : 'bg-white text-slate-700 border-amber-200 hover:border-[#4B006E]'}">
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function filterByCategory(cat) {
+            currentCategory = cat;
+            switchView('shop');
+            renderCategoryPills();
+            renderProducts();
+            scrollToProducts();
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderProducts(searchQuery = '') {
+            const grid = document.getElementById('products-grid');
+            let filtered = store.products;
+
+            if (currentCategory !== "All Crafts") {
+                filtered = filtered.filter(p => p.category === currentCategory);
+            }
+
+            if (searchQuery.trim() !== '') {
+                filtered = filtered.filter(p => 
+                    p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                    (p.code && p.code.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                    p.desc.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            document.getElementById('product-count').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-lg border border-amber-200">
+                        <i data-lucide="package-x" class="w-12 h-12 text-slate-300 mx-auto mb-2"></i>
+                        <p class="text-slate-600 font-medium">No handcrafted items found in this section.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                const codeStr = p.code || ('MRT-' + p.id);
+                const variantList = p.variants ? p.variants.split(',').map(v => v.trim()).filter(Boolean) : [];
+
+                return `
+                <div class="bg-white rounded-lg border border-amber-200/80 overflow-hidden shadow-sm hover:shadow-md transition group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden aspect-square bg-slate-100 cursor-pointer" onclick="openProductModal(${p.id})">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-[#4B006E] text-amber-100 text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-sm shadow">
+                                ${p.category}
+                            </span>
+                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur text-purple-900 text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow border border-amber-300">
+                                ID: ${codeStr}
+                            </span>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <h3 onclick="openProductModal(${p.id})" class="font-heading text-lg font-bold text-slate-900 group-hover:text-[#4B006E] cursor-pointer line-clamp-1">${p.title}</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2">${p.desc}</p>
+
+                            <!-- Variant Select Option -->
+                            ${variantList.length > 0 ? `
+                                <div class="pt-2">
+                                    <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Select Variant:</label>
+                                    <select id="card-variant-${p.id}" class="w-full text-xs p-1.5 bg-slate-50 border border-amber-200 rounded focus:outline-none focus:border-[#4B006E]">
+                                        ${variantList.map(v => `<option value="${v}">${v}</option>`).join('')}
+                                    </select>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 flex items-center justify-between border-t border-slate-100 mt-2">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Price</span>
+                            <span class="font-bold text-[#4B006E] text-base">${p.price.toLocaleString()} BDT</span>
+                        </div>
+                        <button onclick="addToCartFromCard(${p.id})" class="btn-gold px-3 py-2 text-xs font-semibold rounded flex items-center gap-1.5">
+                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Add to Bag
+                        </button>
+                    </div>
+                </div>
+            `}).join('');
+
+            lucide.createIcons();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('search-input').value;
+            renderProducts(query);
+        }
+
+        // ================= CART & ORDER SYSTEM ================= //
+        function addToCartFromCard(productId) {
+            const variantElem = document.getElementById(`card-variant-${productId}`);
+            const selectedVariant = variantElem ? variantElem.value : 'Standard';
+            addToCart(productId, selectedVariant);
+        }
+
+        function addToCart(productId, selectedVariant = 'Standard') {
+            const product = store.products.find(p => p.id === productId);
+            if (!product) return;
+
+            const codeStr = product.code || ('MRT-' + product.id);
+            const cartItemId = `${productId}_${selectedVariant}`;
+
+            const existing = cart.find(item => item.cartItemId === cartItemId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ 
+                    ...product, 
+                    code: codeStr,
+                    selectedVariant: selectedVariant, 
+                    cartItemId: cartItemId,
+                    qty: 1 
+                });
+            }
+
+            saveCart();
+            toggleCartModal(true);
+        }
+
+        function updateCartQty(cartItemId, delta) {
+            const item = cart.find(i => i.cartItemId === cartItemId);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.cartItemId !== cartItemId);
+            }
+            saveCart();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const list = document.getElementById('cart-items-list');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            badge.innerText = totalQty;
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
+                        <p class="text-sm">Your craft bag is empty</p>
+                    </div>
+                `;
+            } else {
+                list.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-3 py-3">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded border">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${item.title}</h4>
+                                <span class="text-[10px] font-mono font-bold bg-amber-100 text-purple-900 px-1 rounded ml-1">ID:${item.code}</span>
+                            </div>
+                            <p class="text-[11px] text-amber-800 font-semibold">Variant: ${item.selectedVariant || 'Standard'}</p>
+                            <span class="text-xs font-semibold text-[#4B006E]">${item.price.toLocaleString()} BDT</span>
+                            <div class="flex items-center gap-2 mt-1">
+                                <button onclick="updateCartQty('${item.cartItemId}', -1)" class="w-5 h-5 bg-slate-200 rounded text-xs font-bold">-</button>
+                                <span class="text-xs font-bold px-1">${item.qty}</span>
+                                <button onclick="updateCartQty('${item.cartItemId}', 1)" class="w-5 h-5 bg-slate-200 rounded text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <button onclick="updateCartQty('${item.cartItemId}', -${item.qty})" class="text-slate-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('cart-subtotal').innerText = `${subtotal.toLocaleString()} BDT`;
+            document.getElementById('cart-total').innerText = `${subtotal.toLocaleString()} BDT`;
+            lucide.createIcons();
+        }
+
+        function toggleCartModal(show = null) {
+            const modal = document.getElementById('cart-modal');
+            if (show === true) modal.classList.remove('hidden');
+            else if (show === false) modal.classList.add('hidden');
+            else modal.classList.toggle('hidden');
+        }
+
+        // DIRECT WHATSAPP ORDER SUBMISSION WITH UNIQUE PRODUCT ID & VARIANT
+        function submitOrderToWhatsApp() {
+            if (cart.length === 0) {
+                alert('Please add items to your cart before proceeding.');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const note = document.getElementById('checkout-note').value.trim();
+
+            if (!name || !address) {
+                alert('Please provide your name and delivery address for craft shipment.');
+                return;
+            }
+
+            let text = `*NEW ORDER - MRITTIKA CRAFTS*\n`;
+            text += `-----------------------------------\n`;
+            text += `*Customer:* ${name}\n`;
+            text += `*Address:* ${address}\n`;
+            if(note) text += `*Custom Note:* ${note}\n`;
+            text += `-----------------------------------\n`;
+            text += `*ORDERED ITEMS:*\n`;
+
+            let grandTotal = 0;
+            cart.forEach((item, idx) => {
+                const itemTotal = item.price * item.qty;
+                grandTotal += itemTotal;
+                text += `${idx + 1}. [${item.code}] ${item.title}\n`;
+                text += `   - Variant: ${item.selectedVariant || 'Standard'}\n`;
+                text += `   - Qty: x${item.qty} (${itemTotal.toLocaleString()} BDT)\n`;
+            });
+
+            text += `-----------------------------------\n`;
+            text += `*TOTAL AMOUNT:* ${grandTotal.toLocaleString()} BDT\n`;
+            text += `-----------------------------------\n`;
+            text += `Please confirm my order and share payment instructions!`;
+
+            const phone = store.site.phone.replace(/[^0-9]/g, '');
+            const encoded = encodeURIComponent(text);
+            const waUrl = `https://wa.me/88${phone}?text=${encoded}`;
+
+            window.open(waUrl, '_blank');
+        }
+
+        // ================= PRODUCT MODAL ================= //
+        function openProductModal(id) {
+            const product = store.products.find(p => p.id === id);
+            if(!product) return;
+
+            const codeStr = product.code || ('MRT-' + product.id);
+            const variantList = product.variants ? product.variants.split(',').map(v => v.trim()).filter(Boolean) : [];
+
+            document.getElementById('product-modal-body').innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <img src="${product.image}" class="w-full h-80 object-cover rounded-lg border border-amber-200">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#C2A060]">${product.category}</span>
+                            <span class="text-xs font-mono font-bold bg-amber-100 text-purple-900 px-2 py-0.5 rounded border border-amber-300">ID: ${codeStr}</span>
+                        </div>
+                        <h2 class="font-heading text-2xl font-bold text-[#4B006E]">${product.title}</h2>
+                        <p class="text-xs text-slate-600 leading-relaxed">${product.desc}</p>
+                        
+                        ${variantList.length > 0 ? `
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Select Variant Option:</label>
+                                <select id="modal-variant-select" class="w-full text-xs p-2 bg-slate-50 border border-amber-300 rounded font-semibold focus:outline-none focus:ring-1 focus:ring-[#4B006E]">
+                                    ${variantList.map(v => `<option value="${v}">${v}</option>`).join('')}
+                                </select>
+                            </div>
+                        ` : ''}
+
+                        <div class="text-2xl font-bold text-slate-900">${product.price.toLocaleString()} BDT</div>
+                        <button onclick="addToCartFromModal(${product.id}); closeProductModal();" class="w-full btn-gold py-3 text-sm font-bold rounded flex justify-center items-center gap-2">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Add To Bag
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('product-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function addToCartFromModal(productId) {
+            const variantElem = document.getElementById('modal-variant-select');
+            const selectedVariant = variantElem ? variantElem.value : 'Standard';
+            addToCart(productId, selectedVariant);
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // ================= BLOG SYSTEM ================= //
+        function renderBlog() {
+            const list = document.getElementById('blog-posts-list');
+            list.innerHTML = store.blog.map(post => `
+                <article class="bg-white rounded-xl border border-amber-200/80 overflow-hidden shadow-sm hover:shadow transition">
+                    <img src="${post.image}" class="w-full h-64 object-cover">
+                    <div class="p-6 space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-slate-500">
+                            <span><i data-lucide="user" class="w-3.5 h-3.5 inline mr-1"></i> ${post.author}</span>
+                            <span>•</span>
+                            <span><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1"></i> ${post.date}</span>
+                        </div>
+                        <h2 class="font-heading text-2xl font-bold text-[#4B006E] hover:underline cursor-pointer" onclick="openPost(${post.id})">${post.title}</h2>
+                        <div class="text-xs text-slate-600 line-clamp-3">${post.content.replace(/<[^>]*>?/gm, '')}</div>
+                        <button onclick="openPost(${post.id})" class="text-xs font-bold text-[#4B006E] tracking-wider uppercase inline-flex items-center gap-1 mt-2">Read Full Article <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                </article>
+            `).join('');
+
+            document.getElementById('blog-categories-list').innerHTML = store.categories.map(c => `
+                <div class="flex justify-between items-center py-1 border-b border-slate-100">
+                    <span>${c}</span>
+                    <span class="text-xs bg-amber-100 px-2 py-0.5 rounded text-amber-900">${store.products.filter(p => p.category === c).length}</span>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function openPost(id) {
+            const post = store.blog.find(b => b.id === id);
+            if(!post) return;
+
+            document.getElementById('post-content-container').innerHTML = `
+                <div class="space-y-4">
+                    <span class="text-xs font-bold text-[#C2A060] uppercase tracking-widest">Journal Article</span>
+                    <h1 class="font-heading text-3xl md:text-4xl font-bold text-[#4B006E]">${post.title}</h1>
+                    <div class="flex items-center gap-4 text-xs text-slate-500 pb-4 border-b">
+                        <span>By ${post.author}</span>
+                        <span>${post.date}</span>
+                    </div>
+                    <img src="${post.image}" class="w-full h-80 object-cover rounded-lg">
+                    <div class="prose max-w-none text-slate-700 text-sm leading-relaxed space-y-4 pt-4">
+                        ${post.content}
+                    </div>
+                </div>
+            `;
+            switchView('single-post');
+        }
+
+        // ================= VIEW SWITCHER ================= //
+        function switchView(viewName) {
+            document.getElementById('view-shop').classList.add('hidden');
+            document.getElementById('view-blog').classList.add('hidden');
+            document.getElementById('view-single-post').classList.add('hidden');
+
+            if(viewName === 'shop') document.getElementById('view-shop').classList.remove('hidden');
+            if(viewName === 'blog') document.getElementById('view-blog').classList.remove('hidden');
+            if(viewName === 'single-post') document.getElementById('view-single-post').classList.remove('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function dismissNotice() {
+            document.getElementById('notice-banner').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+
+    </script>
+</body>
+</html>
