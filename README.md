@@ -1,3 +1,5 @@
+![Mrittika](assets/banner.svg)
+
 # Mrittika
 
 > A modern content-driven web platform with a dedicated local admin panel and GitHub-powered publishing workflow.
